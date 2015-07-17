@@ -5,7 +5,7 @@
  *
  *    Description:  10-bit ADC Driver code for MSP430G2553
  *
- *        Version:  0.0.1
+ *        Version:  0.0.1 untested
  *        Created:  07/16/2015 08:33:39 PM
  *       Revision:  none
  *       Compiler:  msp430-elf-gcc
