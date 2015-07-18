@@ -14,7 +14,7 @@
 volatile unsigned char txFlag;
 volatile unsigned char txChar;
 volatile unsigned char rxFlag;
-volatile unsigned char txFlag;
+volatile unsigned char rxChar;
 
 
 void uartInit(void){
@@ -43,19 +43,20 @@ void uartInit(void){
     UCA0MCTL = UCBRS0; // UCBRSx = 1, UCBRFx = 0
 
     UCA0CTL1 &= ~UCSWRST;
-    __bix_SR_register(GIE);
+    __bis_SR_register(GIE);
 }
     
-void uartSendChar(char toSend){
+void uartSendChar(unsigned char toSend){
     txChar = toSend;
     IE2 |= UCA0TXIE;
     while (txFlag == 1); 
     txFlag = 1;
 }
 
-void uartSendString(char *toSend){
+void uartSendString(unsigned char *toSend){
     while(*toSend){
-        *toSend++;
+        uartSendChar(*toSend);
+        toSend++;
     }
 }
 
