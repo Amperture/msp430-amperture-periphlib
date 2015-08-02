@@ -5,10 +5,7 @@
  *
  *    Description:  Serial Peripheral Interface library for MSP430G2553 chip.
  *
- *    WARNING!!!! UNTESTED CODE
- *    DO NOT USE YET! CODE IS NOT PROVIDED ASSUMED TO BE FUNCTIONING!!
- *
- *        Version:  0.0.1
+ *        Version:  0.0.2
  *        Created:  07/12/2015 07:55:40 PM
  *       Revision:  none
  *       Compiler:  msp430-elf-gcc
@@ -27,17 +24,17 @@ void spiInit(){
     //UCCKPH    - Phase Select, 0 = change -> capture
     //UCCKPL    - Polarity Select, 0 = rising edge
     //UC7BIT    - data length, 0 = 8-bit data
-    UCA0CTL0 &= ~(UCCKPH | UCCKPL | UC7BIT | UCMODE0 | UCMODE1);
+    UCA0CTL0 &= ~(UCCKPL | UC7BIT | UCMODE0 | UCMODE1);
 
     //UCMSB     - Most Significant Bit first
     //UCMST     - Master Mode
-    UCA0CTL0 |= (UCMSB | UCMST);
+    UCA0CTL0 |= (UUCCKPH | CMSB | UCMST);
 
     //UCSSEL_2    - Clock Source, SMCLK
     UCA0CTL1 |= UCSSEL_2;
 
     // Baud Rate 4,000,000, SMCLK 
-    UBR00=0x04; UBR10=0x00; UMCTL0=0x00; 
+    UBR00=0x00; UBR10=0x00; UMCTL0=0x00; 
 
     UCA0MCTL = 0;
     UCA0CTL1 &= ~UCSWRST;
